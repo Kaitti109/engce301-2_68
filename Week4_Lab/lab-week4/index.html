@@ -3,172 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 4 – Persona Dashboard (Starter)</title>
-
-    <!-- TODO: นักศึกษาสามารถเปลี่ยนฟอนต์ตามชอบ เช่น Google Fonts -->
+    <title>Café Boss Dashboard - จัดการร้านกาแฟอย่างมืออาชีพ</title> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 
-        TODO: ส่วนนี้ให้เขียนใน README.md แยกต่างหาก
-        - อธิบาย Persona (ชื่อ, อายุ, อาชีพ, Goals, Pain Points)
-        - อธิบายว่าหน้าเว็บนี้ตอบโจทย์ Persona อย่างไร
-    -->
 
     <header class="site-header">
         <div class="logo-area">
-            <!-- TODO: เปลี่ยนชื่อระบบ/โลโก้ให้เข้ากับ Persona -->
-            <h1>Persona Dashboard</h1>
-            <p class="tagline">สรุปทุกอย่างในหน้าเดียวสำหรับผู้ใช้ของคุณ</p>
+            <h1>Café Boss Dashboard</h1>
+            <p class="tagline">สรุปภาพรวมธุรกิจ และงานสำคัญที่ต้องจัดการ</p>
         </div>
 
         <nav class="main-nav">
-            <!-- 
-                TODO: ปรับชื่อเมนูให้เข้ากับ Persona
-                เช่น "วันนี้", "งานที่ต้องทำ", "สถิติ", "ประวัติ", ฯลฯ
-            -->
-            <a href="#today">วันนี้</a>
-            <a href="#tasks">งานของฉัน</a>
-            <a href="#extra">ข้อมูลอื่น ๆ</a>
+            <a href="#overview">ภาพรวมธุรกิจ</a>
+            <a href="#tasks">รายการที่ต้องจัดการ</a>
+            <a href="#inventory">สต็อก/ต้นทุน</a>
         </nav>
     </header>
 
     <main>
-        <!-- Section 1: ภาพรวมวันนี้ / Overview -->
-        <section id="today" class="section section-today">
+        <section id="overview" class="section section-today">
             <header class="section-header">
-                <h2>ภาพรวมวันนี้ของ Persona</h2>
-                <!-- TODO: สรุปสั้น ๆ ว่า Persona สนใจอะไรเป็นอันดับแรก -->
+                <h2>ภาพรวมการดำเนินงานวันนี้</h2>
                 <p class="section-subtitle">
-                    สรุปข้อมูลที่สำคัญที่สุดที่ Persona อยากเห็นเมื่อเปิดเว็บนี้
+                    ตรวจสอบสถานะยอดขายปัจจุบัน ความพร้อมของร้าน และประเด็นเร่งด่วน
                 </p>
             </header>
 
             <div class="cards-row">
-                <!-- 
-                    TODO: ให้นักศึกษาเปลี่ยนเนื้อหาในแต่ละ .card 
-                    ให้ตรงกับ persona ของกลุ่มตัวเอง
-                -->
+                
                 <article class="card">
-                    <h3>สรุปงานวันนี้</h3>
-                    <p>งานที่ต้องทำ: 3 งาน</p>
-                    <p>งานที่ใกล้ deadline ที่สุด: ส่งรายงานวิชา ENGCE301</p>
-                    <!-- TODO: เปลี่ยนข้อมูลเป็นของ Persona -->
+                    <h3>สรุปยอดขายวันนี้ (ณ เวลา 12:00 น.)</h3> 
+                    <p><strong>ยอดขายรวม: 4,500 บาท</strong> (เทียบกับเมื่อวาน: +8%)</p>
+                    <p>ช่องทางยอดขายสูงสุด: In-Store (65%), Delivery (35%)</p>
                 </article>
 
                 <article class="card">
-                    <h3>นัดหมายสำคัญ</h3>
-                    <p>13:00 – ประชุมกลุ่มโปรเจกต์</p>
-                    <p>19:30 – ทบทวนบทเรียน / ทำการบ้าน</p>
-                    <!-- TODO: ปรับให้ตรงกับชีวิตจริงของ Persona -->
+                    <h3>สถานะเงินสดหมุนเวียน</h3>
+                    <p><strong>กระแสเงินสดในมือ: 7,800 บาท</strong></p>
+                    <p>รายจ่ายสำคัญที่กำลังจะมาถึง: ค่าเช่า (ใน 3 วัน), ค่าเมล็ดกาแฟล็อตใหม่</p>
                 </article>
 
                 <article class="card">
-                    <h3>สถิติเล็ก ๆ น้อย ๆ</h3>
-                    <p>งานที่เสร็จแล้วในสัปดาห์นี้: 5</p>
-                    <p>เปอร์เซ็นต์ความคืบหน้า: 60%</p>
-                    <!-- TODO: อาจเปลี่ยนเป็นกราฟแท่ง/แถบ progress bar ในเวอร์ชันถัดไป -->
+                    <h3>สถานะการควบคุมคุณภาพ (QC)</h3>
+                    <p><strong>ต้อง Calibrate เครื่องบด: 1 เครื่อง</strong> (สำคัญ)</p>
+                    <p>การ Feedback จากลูกค้าออนไลน์: 1 รีวิวเชิงลบ (ต้องตอบกลับ)</p>
                 </article>
             </div>
         </section>
 
-        <!-- Section 2: งานที่ต้องทำ / Tasks -->
         <section id="tasks" class="section section-tasks">
             <header class="section-header">
-                <h2>งานที่ต้องทำ</h2>
+                <h2>งานที่ต้องจัดการ (Action Items)</h2>
                 <p class="section-subtitle">
-                    รายการงาน / กิจกรรมที่ Persona ต้องจัดการในช่วงวันนี้หรือสัปดาห์นี้
+                    รายการงาน / กิจกรรมที่ต้องจัดการเพื่อรักษาคุณภาพและขยายตลาดดิจิทัล
                 </p>
             </header>
 
-            <!-- 
-                TODO: เลือกว่าจะใช้ <ul>, <ol> หรือ <table> ตามลักษณะข้อมูล
-                และให้นักศึกษาออกแบบรูปแบบข้อมูลเอง
-            -->
             <div class="tasks-layout">
                 <div class="tasks-list">
-                    <h3>To-Do List</h3>
+                    <h3>To-Do List เร่งด่วน</h3>
                     <ul>
-                        <li>ตัวอย่าง: ตรวจอีเมลจากอาจารย์</li>
-                        <li>ตัวอย่าง: ทำแบบฝึกหัด HTML/CSS</li>
-                        <li>ตัวอย่าง: เตรียมสไลด์นำเสนอ</li>
-                        <!-- TODO: เปลี่ยนรายการเป็นงานจริงของ Persona -->
-                    </ul>
+                        <li><input type="checkbox"> <strong>Calibrate</strong> เครื่องบดกาแฟ House Blend</li>
+                        <li><input type="checkbox"> ตอบกลับรีวิว 1 ดาว บน Google Maps (ด่วน)</li>
+                        <li><input type="checkbox"> สั่งซื้อนมสด (ใกล้หมด)</li>
+                        </ul>
                 </div>
 
                 <div class="tasks-table-wrapper">
-                    <h3>ตารางงาน (ตัวอย่าง)</h3>
+                    <h3>การตลาดดิจิทัลและการแข่งขัน (Goal: ขยายฐานลูกค้าดิจิทัล)</h3>
                     <table class="tasks-table">
                         <thead>
                             <tr>
                                 <th>งาน</th>
-                                <th>กำหนดส่ง</th>
+                                <th>กำหนดเสร็จ</th>
                                 <th>สถานะ</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>ส่งรายงาน LAB Week 4</td>
-                                <td>พุธ 23:59</td>
-                                <td>กำลังทำ</td>
+                                <td>สร้าง Content เมนูใหม่ลง IG Stories</td>
+                                <td>วันนี้ 16:00</td>
+                                <td>กำลังเตรียมภาพ</td>
                             </tr>
                             <tr>
-                                <td>อ่านทบทวน Design Principles</td>
-                                <td>วันนี้</td>
-                                <td>ยังไม่ได้เริ่ม</td>
+                                <td>วิเคราะห์ราคาคู่แข่ง (เมนู Latte)</td>
+                                <td>พรุ่งนี้เช้า</td>
+                                <td>รอข้อมูล</td>
                             </tr>
                             <tr>
-                                <td>นัดหมายปรึกษาโปรเจกต์</td>
-                                <td>ศุกร์หน้า</td>
-                                <td>จองเวลาแล้ว</td>
+                                <td>ตรวจสอบความแม่นยำของราคาใน Delivery App</td>
+                                <td>สิ้นสัปดาห์</td>
+                                <td>เสร็จสิ้น</td>
                             </tr>
-                            <!-- TODO: ปรับข้อมูลตารางให้เข้ากับ Persona -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: ข้อมูลเสริม / Extra Info -->
-        <section id="extra" class="section section-extra">
+        <section id="inventory" class="section section-extra">
             <header class="section-header">
-                <h2>ข้อมูลอื่น ๆ ที่ Persona สนใจ</h2>
+                <h2>สต็อก, ต้นทุน และการควบคุมราคา</h2>
                 <p class="section-subtitle">
-                    ส่วนนี้ให้นักศึกษาออกแบบเองว่าจะใส่อะไร เช่น ข่าว, ลิงก์, สรุปคะแนน, แผนระยะยาว ฯลฯ
+                    การจัดการสินค้าคงคลังและข้อมูลที่ช่วยในการตัดสินใจด้านต้นทุน
                 </p>
             </header>
 
             <div class="extra-layout">
                 <article class="card">
-                    <h3>ตัวอย่าง: Tips ประจำวัน</h3>
-                    <p>
-                        "แบ่งเวลาทำงานเป็นช่วงละ 25 นาที แล้วพัก 5 นาที (เทคนิค Pomodoro)"
-                    </p>
-                    <!-- TODO: เปลี่ยนเป็น Tips ที่ตรงกับวิธีการทำงานของ Persona -->
+                    <h3>สรุปต้นทุนต่อแก้วหลัก (Cost of Goods Sold - COGS)</h3>
+                    <p>Latte (มาตรฐาน): ต้นทุน <strong>22.50 บาท</strong></p>
+                    <p>อัตราส่วน COGS ต่อราคาขาย: <strong>25%</strong> (เป้าหมายคือไม่เกิน 28%)</p>
+                    <p><em>*ใช้ข้อมูลเมล็ดกาแฟราคาล่าสุด</em></p>
                 </article>
 
                 <article class="card">
-                    <h3>ตัวอย่าง: ลิงก์ที่ใช้บ่อย</h3>
+                    <h3>ราคาคู่แข่งและตลาด (อ้างอิง Latte M)</h3>
                     <ul>
-                        <li><a href="#">ระบบจัดการเรียน</a></li>
-                        <li><a href="#">Google Calendar</a></li>
-                        <li><a href="#">GitHub Repository</a></li>
-                        <!-- TODO: เปลี่ยนลิงก์ให้ตรงกับของจริงที่ Persona ใช้ -->
+                        <li>คู่แข่ง A (Chains): 75 บาท</li>
+                        <li>คู่แข่ง B (Local): 60 บาท</li>
+                        <li><strong>ราคาขายร้านเรา: 80 บาท</strong></li>
                     </ul>
+                    <p class="note"><em>*ราคาสะท้อนคุณภาพ Specialty ที่สูงกว่า</em></p>
                 </article>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <!-- TODO: ปรับข้อความ footer ตามที่กลุ่มต้องการ -->
+
         <p>สร้างเพื่อ ENGCE301 – Week 4 LAB (HTML, CSS &amp; Responsive Design)</p>
+
     </footer>
 
-    <!-- 
-        TODO (เสริม): 
-        - นักศึกษาอาจเพิ่มปุ่มกลับขึ้นด้านบน
-        - หรือส่วนสรุป Persona อย่างสั้น ๆ ใน footer หรือ sidebar
-    -->
 </body>
 </html>
