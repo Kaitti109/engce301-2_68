@@ -1,5 +1,5 @@
-Persona
-<------------------------------------->
+                        Persona
+                        
 อธิบาย Persona (ชื่อ, อายุ, อาชีพ, Goals, Pain Points)
 ชื่อ:Jhon 
 อายุ:27
