@@ -22,5 +22,13 @@
     "price": 8990,
     "stock": 25,
     "description": "Active Noise Cancellation"
+  },
+  {
+    "id": 4,
+    "name": "iPad Air",
+    "category": "Electronics",
+    "price": 19900,
+    "stock": 12,
+    "description": "10.9-inch iPad Air"
   }
 ]
