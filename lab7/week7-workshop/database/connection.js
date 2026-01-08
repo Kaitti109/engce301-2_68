@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
-const dbPath = path.resolve(__dirname, 'products.db');
+const dbPath = path.resolve(__dirname, 'products.sqlite');
 
 // Create connection
 const db = new sqlite3.Database(dbPath, (err) => {
