@@ -1,95 +1,84 @@
 const X_IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1083533/x.png';
 const O_IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1083533/circle.png';
+// Add event listeners?
 
-function assignSpace(space, owner) {
-  const image = document.createElement('img');
-  image.src = owner === 'x' ? X_IMAGE_URL : O_IMAGE_URL;
-  space.appendChild(image);
-
-  takenBoxes[space.id] = owner;
-  const indexToRemove = freeBoxes.indexOf(space);
-  freeBoxes.splice(indexToRemove, 1);
-  space.removeEventListener('click', changeToX);
-}
+let xScore = 0;
+let oScore = 0;
+let isXTurn = true;
+let isGameOver = false;
 
 function changeToX(event) {
-  assignSpace(event.currentTarget, 'x');
-
-  if (isGameOver()) {
-    displayWinner();
+  if (isGameOver) return;
+  const container = event.currentTarget;// Get the element that was clicked
+  const image = document.createElement('img');// Create an <img> tag with the X img src
+  
+  const currentPlayer = isXTurn ? 'X' : 'O';
+  if (isXTurn) {
+    image.src = X_IMAGE_URL;
+    image.classList.add('x-color'); // <-- เพิ่มคลาสสีแดงให้ X
   } else {
-    computerChooseO();
+    image.src = O_IMAGE_URL;
+    image.classList.add('o-color'); // <-- เพิ่มคลาสสีน้ำเงินให้ O
   }
+  image.src = isXTurn ? X_IMAGE_URL : O_IMAGE_URL;
+
+  container.classList.add(currentPlayer); 
+  container.appendChild(image);
+  container.removeEventListener('click', changeToX);
+  
+  if (checkWinner(currentPlayer)) {
+        isGameOver = true;
+        updateScore(currentPlayer);
+        setTimeout(() => alert(currentPlayer + " ชนะแล้ว!"), 100);
+    }
+  
+  container.appendChild(image);// Append that <img> tag to the element
+  container.removeEventListener('click', changeToX)
+  isXTurn = !isXTurn;
 }
 
-function computerChooseO() {
-  const allBoxes  = document.querySelectorAll('#grid div');
-  const index = Math.floor(Math.random() * freeBoxes.length);
-  const freeSpace = freeBoxes[index];
+// ฟังก์ชันตรวจการชนะ
+function checkWinner(player) {
+    const boxes = document.querySelectorAll('#grid div');
+    // กำหนดตำแหน่งที่ถ้าเรียงกันแล้วจะชนะ (Index 0-8)
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // แนวนอน
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // แนวตั้ง
+        [0, 4, 8], [2, 4, 6]             // แนวทแยง
+    ];
 
-  assignSpace(freeSpace, 'o');
-
-  if (isGameOver()) {
-    displayWinner();
-  }
+    return winPatterns.some(pattern => {
+        return pattern.every(index => {
+            return boxes[index].classList.contains(player);
+        });
+    });
 }
 
-function isGameOver() {
-  return freeBoxes.length === 0 || getWinner() !== null;
+// ฟังก์ชันอัปเดตคะแนน
+function updateScore(winner) {
+    if (winner === 'X') {
+        xScore++;
+        document.querySelector('#x-score').textContent = xScore;
+    } else {
+        oScore++;
+        document.querySelector('#o-score').textContent = oScore;
+    }
 }
 
-function displayWinner() {
-  const winner = getWinner();
-
-  const resultContainer = document.querySelector('#results');
-  const header = document.createElement('h1');
-  if (winner === 'x') {
-    header.textContent = 'You win!';
-  } else if (winner === 'o'){
-    header.textContent = 'Computer wins';
-  } else {
-    header.textContent = 'Tie';
-  }
-  resultContainer.appendChild(header);
-
-  // Remove remaining event listeners
-  for (const box of freeBoxes) {
-    box.removeEventListener('click', changeToX);
-  }
+function resetGame() {
+    const boxes = document.querySelectorAll('#grid div');
+    for (const box of boxes) {
+        box.innerHTML = '';
+        box.classList.remove('X', 'O'); // ลบประวัติการเดินเก่าออก
+        box.addEventListener('click', changeToX);
+    }
+    isXTurn = true;
+    isGameOver = false;
 }
 
-function checkBoxes(one, two, three) {
-  if (takenBoxes[one] !== undefined &&
-      takenBoxes[one] === takenBoxes[two] &&
-      takenBoxes[two] === takenBoxes[three]) {
-    return takenBoxes[one];
-  }
-  return null;
-}
-
-// Returns 'x', 'o', or null for no winner yet.
-function getWinner() {
-  // Check rows
-  let rowResult = checkBoxes('one', 'two', 'three') ||
-      checkBoxes('four', 'five', 'six') ||
-      checkBoxes('seven', 'eight', 'nine');
-
-  // Check columns
-  let colResult = checkBoxes('one', 'four', 'seven') ||
-      checkBoxes('two', 'five', 'eight') ||
-      checkBoxes('three', 'six', 'nine');
-
-  // Check diagonal
-  let diagonalResult = checkBoxes('one', 'five', 'nine') ||
-      checkBoxes('three', 'five', 'seven');
-  return rowResult || colResult || diagonalResult;
-}
-
-const freeBoxes = [];
-// Map of box number -> 'x' or 'o'
-const takenBoxes = {};
 const boxes = document.querySelectorAll('#grid div');
 for (const box of boxes) {
   box.addEventListener('click', changeToX);
-  freeBoxes.push(box);
 }
+
+document.querySelector('#reset-btn').addEventListener('click',resetGame);
