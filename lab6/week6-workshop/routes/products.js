@@ -177,7 +177,7 @@ await writeProducts(products);
 router.delete("/:id", async (req, res) => {
   try {
     // TODO: เขียนโค้ดลบ product
-    const products = await readProducts();
+   const products = await readProducts();
 const id = parseInt(req.params.id);
 
 const productIndex = products.findIndex(p => p.id === id);
@@ -188,9 +188,10 @@ if (productIndex === -1) {
         error: 'Product not found'
     });
 }
+
 products.splice(productIndex, 1);
 await writeProducts(products);
-//---------------------
+
     res.json({
       success: true,
       message: "Product deleted successfully",
