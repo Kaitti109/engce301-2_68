@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจองห้องประชุม - 67543206002-7</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #10b981;
+            --danger: #ef4444; /* เพิ่มสีแดงสำหรับปุ่มลบ */
+            --bg: #f1f5f9;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 20px;
+        }
+
+        .container { max-width: 950px; margin: 0 auto; }
+
+        .card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
+        label { font-weight: 600; margin-bottom: 5px; }
+
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        .btn {
+            cursor: pointer; padding: 10px 15px; border: none;
+            border-radius: 6px; font-weight: bold; transition: 0.3s;
+        }
+
+        .btn-search { background: var(--primary); color: white; width: 100%; }
+        .btn-book { background: var(--success); color: white; }
+        .btn-delete { background: var(--danger); color: white; font-size: 0.8rem; }
+        .btn-delete:hover { background: #dc2626; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; }
+
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; }
+        .badge-pending { background: #fef3c7; color: #92400e; }
+        .badge-approved { background: #d1fae5; color: #065f46; }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+            align-items: center; justify-content: center;
+        }
+
+        .modal-content { background: white; padding: 25px; border-radius: 12px; width: 400px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🏢 ระบบจองห้องประชุมออนไลน์</h1>
+        <p>นักศึกษา: 67543206002-7</p>
+    </header>
+
+    <section class="card">
+        <h2>🔍 ค้นหาห้องประชุม</h2>
+        <div class="search-grid">
+            <div class="form-group">
+                <label>วันที่</label>
+                <input type="date" id="searchDate">
+            </div>
+            <div class="form-group">
+                <label>เวลาเริ่ม</label>
+                <input type="time" id="startTime">
+            </div>
+            <div class="form-group">
+                <label>เวลาสิ้นสุด</label>
+                <input type="time" id="endTime">
+            </div>
+        </div>
+        <button class="btn btn-search" style="margin-top: 15px;" onclick="searchRooms()">ค้นหาห้องว่าง</button>
+    </section>
+
+    <section id="resultsSection" class="card hidden">
+        <h2>ห้องที่ว่าง</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ห้อง</th>
+                    <th>ความจุ</th>
+                    <th>จัดการ</th>
+                </tr>
+            </thead>
+            <tbody id="roomTableBody"></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>📋 ประวัติการจองของฉัน</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>วันที่</th>
+                    <th>ห้อง</th>
+                    <th>เวลา</th>
+                    <th>สถานะ</th>
+                    <th>ดำเนินการ</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+        </table>
+    </section>
+
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">จองห้อง</h2>
+            <div class="form-group">
+                <label>วัตถุประสงค์</label>
+                <textarea id="purpose" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>จำนวนผู้เข้าร่วม</label>
+                <input type="number" id="attendees">
+            </div>
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <button class="btn btn-book" style="flex: 1;" onclick="confirmBooking()">ยืนยันการจอง</button>
+                <button class="btn" style="flex: 1; background: #94a3b8; color: white;" onclick="closeModal()">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
