@@ -7,15 +7,27 @@ DROP TABLE IF EXISTS tasks;
 
 -- Create tasks table
 -- TODO: Review the schema and understand each field
+-- 1. ลบตารางเก่า (ถ้ามี) แล้วสร้างใหม่พร้อมค่า Default GMT+7
+
 CREATE TABLE tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     description TEXT,
     status TEXT NOT NULL DEFAULT 'TODO',
     priority TEXT DEFAULT 'MEDIUM',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT (datetime('now', '+7 hours')),
+    updated_at DATETIME DEFAULT (datetime('now', '+7 hours'))
 );
+
+-- 2. สร้าง Trigger เพื่ออัปเดตฟิลด์ updated_at ทุกครั้งที่มีการ UPDATE ข้อมูล
+CREATE TRIGGER update_task_timestamp 
+AFTER UPDATE ON tasks
+FOR EACH ROW
+BEGIN
+    UPDATE tasks 
+    SET updated_at = datetime('now', '+7 hours') 
+    WHERE id = OLD.id;
+END;
 
 -- Create index for faster queries on status
 CREATE INDEX idx_task_status ON tasks(status);
